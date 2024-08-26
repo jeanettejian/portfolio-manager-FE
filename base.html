@@ -1,1 +1,141 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% block title %}{% endblock %} - Manager</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="static/bootstrap.min.css">
+  <link rel="stylesheet" href="static/adminlte.min.css">
+  <link rel="stylesheet" href="static/skin-blue.min.css">
+  <link rel="stylesheet" href="static/google_fonts.css">
+  <link rel="stylesheet" href="static/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" href="static/font-awesome/css/solid.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+
+  <script src="static/jquery.min.js"></script>
+  <script src="static/bootstrap.min.js"></script>
+  <script src="static/adminlte.min.js"></script>
+  <script src="static/edu-modal-alert-confirm.js"></script>
+
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+  <div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+      <!-- Logo -->
+      <a href="#" class="logo">
+        <span class="logo-lg"><b>Portfolio Manager</b></span>
+      </a>
+
+      <!-- Header Navbar -->
+      <nav class="navbar navbar-static-top" role="navigation"></nav>
+    </header>
+
+    <!-- Left sidebar -->
+    <aside class="main-sidebar">
+
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img src="static/user.png" class="img-circle" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p>Welcome, user!</p>
+            <a href="#"><i class="fa-solid fa-circle text-success"></i> Active</a>
+          </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu" data-widget="tree" id="mainsidebar">
+          <p class="header" style="background-color:steelblue;padding:3px"></p>
+          <li id="portfolio"><a href="{{ url_for('index') }}"><i class="fa-solid fa-pie-chart"></i> <span>Portfolio</span></a></li>
+          <li id="Performance"><a href="{{ url_for('order.buy') }}"><i class="fa-solid fa-line-chart"></i> <span>Performance</span></a>
+          </li>
+          <li id="modify" class="treeview">
+            <a href="#">
+              <i class="fa-solid fa-pen"></i> <span>Modify Portfolio</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" id="subsidebar">
+              <li id="modify"><a href="{{ url_for('analysis.single_asset') }}"><i class="fa fa-circle-o"></i>
+                  <span>Add Asset</span></a></li>
+              <li id="modify"><a href="{{ url_for('analysis.multi_asset') }}"><i class="fa fa-circle-o"></i>
+                  <span>Multiple Assets</span></a></li>
+            </ul>
+          </li>
+        </ul>
+        <script>
+          $(function () {
+            $('.sidebar-menu li:not(.treeview) > a').on('click', function () {    // onclick events
+              var $parent = $(this).parent().addClass('active');
+              // $parent.siblings('.treeview.active').find('> a').trigger('click');
+              $parent.siblings().removeClass('active').find('li').removeClass('active');
+              $parent.closest('.treeview').addClass('active');
+              $parent.closest('.treeview').siblings().removeClass('active');
+            });
+            $('.sidebar-menu a').each(function () {    // activate the li of current page after loaded DOMs
+              if (this.href === window.location.href) {
+                $(this).parent().addClass('active')
+                  .closest('.treeview-menu').addClass('.menu-open')
+                  .closest('.treeview').addClass('active');
+              }
+            });
+          });
+        </script>
+      </section>
+    </aside>
+
+    <style>
+      .middle-box {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+      }
+
+      .chart-div {
+        flex: 1;
+        margin: 10px;
+        border: 1px solid #ccc;
+        height: 400px;
+        min-width: 300px;
+      }
+    </style>
+
+    <!-- specific pages -->
+    <div class="content-wrapper">
+      {% block main_body %}
+      {% endblock %}
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+      </div>
+    </footer>
+
+    <!-- background -->
+    <div class="control-sidebar-bg"></div>
+  </div>
+
+</body>
+
+</html>
