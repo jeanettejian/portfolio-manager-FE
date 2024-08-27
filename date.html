@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Date Range Picker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            border: 2px solid #ff9f43;
+        }
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #1e90ff;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        .form-group input[type="date"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #1e90ff;
+            border-radius: 8px;
+            width: calc(50% - 10px);
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        .form-group input[type="date"]:focus {
+            border-color: #ff9f43;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 159, 67, 0.5);
+        }
+        .result {
+            font-weight: bold;
+            text-align: center;
+            color: #ff6f61;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Date Range Picker in One Row -->
+        <div class="form-group">
+            <label for="startDateOneRow">Date Range:</label>
+            <input type="date" id="startDateOneRow" name="startDateOneRow">
+            <input type="date" id="endDateOneRow" name="endDateOneRow">
+        </div>
+
+        <div class="result" id="resultOneRow">Please select a start and end date.</div>
+    </div>
+
+    <script>
+        function updateResult() {
+            var startDate = document.getElementById('startDateOneRow').value;
+            var endDate = document.getElementById('endDateOneRow').value;
+            var resultDiv = document.getElementById('resultOneRow');
+
+            if (startDate && endDate) {
+                resultDiv.innerHTML = 'Selected Date Range: ' + startDate + ' to ' + endDate;
+            } else {
+                resultDiv.innerHTML = 'Please select both start and end dates.';
+            }
+        }
+
+        document.getElementById('startDateOneRow').addEventListener('change', updateResult);
+        document.getElementById('endDateOneRow').addEventListener('change', updateResult);
+    </script>
+</body>
+</html>
