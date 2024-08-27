@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{% block title %}{% endblock %} - Manager</title>
+  <title>Portfolio Manager</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="static/bootstrap.min.css">
   <link rel="stylesheet" href="static/adminlte.min.css">
@@ -59,8 +59,8 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree" id="mainsidebar">
           <p class="header" style="background-color:steelblue;padding:3px"></p>
-          <li id="portfolio"><a href="{{ url_for('index') }}"><i class="fa-solid fa-pie-chart"></i> <span>Portfolio</span></a></li>
-          <li id="Performance"><a href="{{ url_for('order.buy') }}"><i class="fa-solid fa-line-chart"></i> <span>Performance</span></a>
+          <li id="portfolio"><a href="portfolio.html"><i class="fa-solid fa-pie-chart"></i> <span>Portfolio</span></a></li>
+          <li id="Performance"><a href="performance.html"><i class="fa-solid fa-line-chart"></i> <span>Performance</span></a>
           </li>
           <li id="modify" class="treeview">
             <a href="#">
@@ -70,9 +70,9 @@
               </span>
             </a>
             <ul class="treeview-menu" id="subsidebar">
-              <li id="modify"><a href="{{ url_for('analysis.single_asset') }}"><i class="fa fa-circle-o"></i>
+              <li id="modify"><a href="#"><i class="fa fa-circle-o"></i>
                   <span>Add Asset</span></a></li>
-              <li id="modify"><a href="{{ url_for('analysis.multi_asset') }}"><i class="fa fa-circle-o"></i>
+              <li id="modify"><a href="#"><i class="fa fa-circle-o"></i>
                   <span>Multiple Assets</span></a></li>
             </ul>
           </li>
@@ -120,10 +120,9 @@
       }
     </style>
 
-    <!-- specific pages -->
+    <!-- specific pages, main body -->
     <div class="content-wrapper">
-      {% block main_body %}
-      {% endblock %}
+      put pie charts here
     </div>
 
     <!-- Main Footer -->
