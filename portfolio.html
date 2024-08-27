@@ -22,6 +22,31 @@
   <script src="static/adminlte.min.js"></script>
   <script src="static/edu-modal-alert-confirm.js"></script>
 
+  <style>
+    .middle-box {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+
+    .container {
+      height: 100vh;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      /* Distributes space between chart and table */
+    }
+
+    .chart-div {
+      flex: 1;
+      margin: 10px;
+      border: 1px solid #ccc;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -59,8 +84,10 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree" id="mainsidebar">
           <p class="header" style="background-color:steelblue;padding:3px"></p>
-          <li id="portfolio"><a href="portfolio.html"><i class="fa-solid fa-pie-chart"></i> <span>Portfolio</span></a></li>
-          <li id="Performance"><a href="performance.html"><i class="fa-solid fa-line-chart"></i> <span>Performance</span></a>
+          <li id="portfolio"><a href="portfolio.html"><i class="fa-solid fa-pie-chart"></i> <span>Portfolio</span></a>
+          </li>
+          <li id="Performance"><a href="performance.html"><i class="fa-solid fa-line-chart"></i>
+              <span>Performance</span></a>
           </li>
           <li id="modify" class="treeview">
             <a href="#">
@@ -98,93 +125,51 @@
       </section>
     </aside>
 
-    <style>
-      .middle-box {
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, 0);
-      }
-
-      .container {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-      }
-
-      .chart-div {
-        flex: 1;
-        margin: 10px;
-        border: 1px solid #ccc;
-        height: 400px;
-        min-width: 300px;
-      }
-    </style>
-
     <!-- specific pages, main body -->
     <div class="content-wrapper">
-      <script>
-        // Initialize the chart
-        var myChart = echarts.init(document.getElementById('main'));
+      
+      <div class="container">
+        <div class="col-md-8">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Pie</h3>
+            </div>
 
-        // Specify the configuration options for the pie chart
-        var option = {
-            tooltip: {
-    trigger: 'item'
-  },
-  legend: {
-    top: '5%',
-    left: 'center'
-  },
-  series: [
-    {
-      name: 'Portfolio Percentage',
-      type: 'pie',
-      radius: ['40%', '70%'],
-      avoidLabelOverlap: false,
-      itemStyle: {
-        borderRadius: 10,
-        borderColor: '#fff',
-        borderWidth: 2
-      },
-      label: {
-        show: false,
-        position: 'center'
-      },
-      emphasis: {
-        label: {
-          show: true,
-          fontSize: 40,
-          fontWeight: 'bold'
-        }
-      },
-      labelLine: {
-        show: false
-      },
-      data: [
-        { value: 35, name: 'GOOG' },
-        { value: 15, name: 'AMZN' },
-        { value: 30, name: 'AAPL' },
-        { value: 20, name: 'META' },
-        { value: 10, name: 'NVDA' }
-      ]
-    }
-  ]
-};
+            <div class="box-body">
+              <div id="piechart" style="height: 600px;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        // Use the specified configuration options and data to render the chart
-        myChart.setOption(option);
-    </script>
-    </div>
+        <div class="col-md-4">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Table</h3>
+            </div>
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-      <div class="pull-right hidden-xs">
+            <div class="box-body">
+              <div id="piechart" style="height: 600px;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
+        <script src="js/piechart.js"></script>
+
       </div>
-    </footer>
+      </div>
 
-    <!-- background -->
-    <div class="control-sidebar-bg"></div>
-  </div>
+      <!-- Main Footer -->
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+        </div>
+      </footer>
+
+      <!-- background -->
+      <div class="control-sidebar-bg"></div>
+    </div>
 
 </body>
 

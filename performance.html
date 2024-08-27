@@ -22,6 +22,36 @@
     <script src="static/adminlte.min.js"></script>
     <script src="static/edu-modal-alert-confirm.js"></script>
 
+    <style>
+        .middle-box {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+
+        .container {
+            height: 100vh;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .chart-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .chart-div {
+            flex: 1;
+            margin: 10px;
+            border: 1px solid #ccc;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -100,43 +130,24 @@
             </section>
         </aside>
 
-        <style>
-            .middle-box {
-                position: absolute;
-                left: 50%;
-                transform: translate(-50%, 0);
-            }
-
-            .container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                /* Align items vertically (center) */
-                width: 100%;
-            }
-
-            .chart-div {
-                flex: 1;
-                margin: 10px;
-                border: 1px solid #ccc;
-                height: 400px;
-                min-width: 300px;
-            }
-        </style>
-
         <!-- specific pages, main body -->
 
         <div class="content-wrapper">
             <div class="container">
-                <div class="box box-info">
-                    <div class="box-header with-border text-center">
-                        <h3 class="box-title"><strong>Portfolio & Market Performance</strong></h3>
+                <div class="col-md-12">
+                  <div class="box">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Portfolio Performance</h3>
                     </div>
+        
                     <div class="box-body">
-                        <div id="linechart" style="width: 600px; height: 700px;margin: 1rem auto;"></div>
+                      <div id="linechart" style="height: 600px;"></canvas>
+                      </div>
                     </div>
+                  </div>
                 </div>
             </div>
+        
             <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
             <script src="js/linechart.js"></script>
         </div>
