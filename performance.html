@@ -117,14 +117,23 @@
 
         <div class="content-wrapper">
             <div class="container">
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin-top:10px;">
                   <div class="box">
                     <div class="box-header with-border">
                       <h3 class="box-title">Portfolio Performance</h3>
                     </div>
         
                     <div class="box-body">
-                      <div id="linechart" style="height: 600px;"></canvas>
+                        <div class="form-container">
+                            <!-- Date Range Picker in One Row -->
+                            <div id="resultDate">Please select a start and end date</div>
+                            <div class="form-group">
+                                <input type="date" id="startDate" name="startDate">
+                                <input type="date" id="endDate" name="endDate">
+                            </div>
+                        </div>
+                        <!-- line chart -->
+                        <div id="linechart" style="height: 500px;"></div>
                       </div>
                     </div>
                   </div>
@@ -133,6 +142,7 @@
         
             <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
             <script src="js/linechart.js"></script>
+            <script src="js/selectdate.js"></script>
         </div>
 
         <!-- Main Footer -->
