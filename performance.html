@@ -131,20 +131,44 @@
                             <div class="form-group">
                                 <input type="date" id="startDate" name="startDate">
                                 <input type="date" id="endDate" name="endDate">
-                                <button type="button" onclick="updateDate()" style="background-color:steelblue;">Submit</button>
+                                <button type="button" onclick="updateDate('A')" style="background-color:steelblue;">Submit</button>
                             </div>
                         </div>
                         </form>
                         <!-- line chart -->
-                        <div id="linechart" style="height: 500px;"></div>
+                        <div id="linechartAsset" style="height: 500px;"></div>
                       </div>
                     </div>
-                  </div>
                 </div>
+                <div class="col-md-6" style="margin-top:10px;">
+                    <div class="box">
+                      <div class="box-header with-border">
+                        <h3 class="box-title">Portfolio Performance</h3>
+                      </div>
+          
+                      <div class="box-body">
+                          <form id="dateForm">
+                          <div class="form-container">
+                              <!-- Date Range Picker in One Row -->
+                              <div id="resultDatePo">Please select a start and end date</div>
+                              <div class="form-group">
+                                  <input type="date" id="startDatePo" name="startDatePo">
+                                  <input type="date" id="endDatePo" name="endDatePo">
+                                  <button type="button" onclick="updateDate('P')" style="background-color:steelblue;">Submit</button>
+                              </div>
+                          </div>
+                          </form>
+                          <!-- line chart -->
+                          <div id="linechartPo" style="height: 500px;"></div>
+                        </div>
+                      </div>
+                  </div>
             </div>
+        </div>
         
-            <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
-            <script src="js/linechart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
+        <script src="js/linechart.js"></script>
+
         </div>
 
         <!-- Main Footer -->

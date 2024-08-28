@@ -1,6 +1,6 @@
 
 // Initialize the chart
-var myChart = echarts.init(document.getElementById('piechart'));
+var AssetChart = echarts.init(document.getElementById('piechart'));
 
 // Specify the configuration options for the pie chart
 var option = {
@@ -48,4 +48,4 @@ var option = {
 };
 
 // Use the specified configuration options and data to render the chart
-myChart.setOption(option);
+AssetChart.setOption(option);
