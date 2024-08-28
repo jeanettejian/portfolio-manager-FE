@@ -118,19 +118,29 @@
         <div class="content-wrapper">
             <div class="container">
                 <div class="col-md-12">
-                  <div class="box">
-                    <div class="box-header with-border">
-                      <h3 class="box-title">Portfolio Performance</h3>
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Search Asset</h3>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <form action="#" method="post" style="display:flex;justify-content:center;">
+                                    <div class="input-group col-xs-3">
+                                        <input type="text" name="input_symbol" placeholder="Type Asset Symbol ..."
+                                            class="form-control">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary btn-flat">Search</button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-        
-                    <div class="box-body">
-                      <div id="linechart" style="height: 600px;"></canvas>
-                      </div>
-                    </div>
-                  </div>
                 </div>
             </div>
-        
+
             <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
             <script src="js/linechart.js"></script>
         </div>

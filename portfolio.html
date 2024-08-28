@@ -89,39 +89,22 @@
           <li id="Performance"><a href="performance.html"><i class="fa-solid fa-line-chart"></i>
               <span>Performance</span></a>
           </li>
-          <li id="modify" class="treeview">
+          <li id="manage" class="treeview">
             <a href="#">
-              <i class="fa-solid fa-pen"></i> <span>Modify Portfolio</span>
+              <i class="fa-solid fa-pen"></i> <span>Manage</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu" id="subsidebar">
-              <li id="modify"><a href="#"><i class="fa fa-circle-o"></i>
-                  <span>Add Asset</span></a></li>
-              <li id="modify"><a href="#"><i class="fa fa-circle-o"></i>
-                  <span>Multiple Assets</span></a></li>
+              <li id="manage"><a href="modify.html"><i class="fa fa-circle-o"></i>
+                  <span>Modify Portfolio</span></a></li>
+              <li id="manage"><a href="search.html"><i class="fa fa-circle-o"></i>
+                  <span>Search Asset</span></a></li>
             </ul>
           </li>
         </ul>
-        <script>
-          $(function () {
-            $('.sidebar-menu li:not(.treeview) > a').on('click', function () {    // onclick events
-              var $parent = $(this).parent().addClass('active');
-              // $parent.siblings('.treeview.active').find('> a').trigger('click');
-              $parent.siblings().removeClass('active').find('li').removeClass('active');
-              $parent.closest('.treeview').addClass('active');
-              $parent.closest('.treeview').siblings().removeClass('active');
-            });
-            $('.sidebar-menu a').each(function () {    // activate the li of current page after loaded DOMs
-              if (this.href === window.location.href) {
-                $(this).parent().addClass('active')
-                  .closest('.treeview-menu').addClass('.menu-open')
-                  .closest('.treeview').addClass('active');
-              }
-            });
-          });
-        </script>
+        <script src="js/treeview.js"></script>
       </section>
     </aside>
 
@@ -149,8 +132,22 @@
             </div>
 
             <div class="box-body">
-              <div id="piechart" style="height: 600px;"></canvas>
-              </div>
+              <table class="table no-margin text-center">
+                <thead>
+                  <tr>
+                    <th>Stock</th>
+                    <th>Shares</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>AAPL</td>
+                    <td>1000</td>
+                    <td>99999</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

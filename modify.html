@@ -117,20 +117,100 @@
 
         <div class="content-wrapper">
             <div class="container">
-                <div class="col-md-12">
-                  <div class="box">
-                    <div class="box-header with-border">
-                      <h3 class="box-title">Portfolio Performance</h3>
+                <div class="col-md-4">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Table</h3>
+                        </div>
+
+                        <div class="box-body">
+                            <table class="table no-margin text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Stock</th>
+                                        <th>Shares</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>AAPL</td>
+                                        <td>1000</td>
+                                        <td>99999</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-        
-                    <div class="box-body">
-                      <div id="linechart" style="height: 600px;"></canvas>
-                      </div>
+                </div>
+
+                <div class="col-md-8" style="display:flex;flex-direction:column;">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Sell</h3>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal">
+                                <div class="form-group" style="display:flex;justify-content:center;">
+                                    <label class="col-sm-2 control-label">Select</label>
+                                    <div class="col-xs-5">
+                                        <select class="form-control">
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                            <option>option 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:flex;justify-content:center;">
+                                    <label class="col-sm-2 control-label">Share</label>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" id="share_num"
+                                            placeholder="Number of shares">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Sell</button>
+                        </div>
+                        </form>
                     </div>
-                  </div>
+
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Buy</h3>
+                        </div>
+                        <div class="box-body">
+                            <form class="form-horizontal">
+                                <div class="form-group" style="display:flex;justify-content:center;">
+                                    <label class="col-sm-2 control-label">Select</label>
+                                    <div class="col-xs-5">
+                                        <select class="form-control">
+                                            <option>option 1</option>
+                                            <option>option 2</option>
+                                            <option>option 3</option>
+                                            <option>option 4</option>
+                                            <option>option 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:flex;justify-content:center;">
+                                    <label class="col-sm-2 control-label">Share</label>
+                                    <div class="col-xs-5">
+                                        <input type="text" class="form-control" id="share_num"
+                                            placeholder="Number of shares">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Buy</button>
+                        </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        
+
             <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
             <script src="js/linechart.js"></script>
         </div>

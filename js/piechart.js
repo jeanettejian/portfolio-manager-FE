@@ -37,7 +37,7 @@ var option = {
                 show: false
             },
             data: [
-                { value: 35, name: 'GOOG' },
+                { value: 25, name: 'GOOG' },
                 { value: 15, name: 'AMZN' },
                 { value: 30, name: 'AAPL' },
                 { value: 20, name: 'META' },
