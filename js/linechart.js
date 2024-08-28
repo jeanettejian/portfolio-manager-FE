@@ -1,3 +1,4 @@
+// Fetch portfolio value data from the back end
 async function fetchPortfolio(url) {
     let response = await fetch(url);
     let portfolioJson = response.json();
@@ -16,10 +17,39 @@ valueJson.forEach(item => {
     dates.push(time);
 })
 
+console.log(values)
+console.log(dates)
+
+
+// 工具函数：判断是否为工作日（周一到周五）
+function isWeekday(date) {
+    const day = date.getDay();
+    return day !== 0 && day !== 6; // 0 为周日，6 为周六
+}
+
+// 工具函数：生成日期范围内的所有工作日
+function generateWeekdaysArray(startDate, endDate) {
+    const categories = [];
+    let currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+        if (isWeekday(currentDate)) {
+            categories.push(currentDate.toISOString().split('T')[0]); // 将日期格式化为 YYYY-MM-DD
+        }
+        currentDate.setDate(currentDate.getDate() + 1); // 将日期加一天
+    }
+
+    return categories;
+}
+// 基于准备好的 DOM，初始化 ECharts 实例
+
 var myChart = echarts.init(document.getElementById('linechart'));
 
 // 指定图表的初始配置项和数据
 var option = {
+    title: {
+        text: '股票价格趋势'
+    },
     tooltip: {
         trigger: 'axis'
     },
@@ -42,8 +72,16 @@ window.onload = async function () {
 
     try {
         // 发起 GET 请求获取数据
-        const response = await fetch('http://localhost:8081/artists/getstocks');
-        console.log('fetching', response.json)
+        const response = await fetch('http://localhost:8081/artists/getstocks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                startDate: '2023-01-09',
+                endDate: '2023-01-20'
+            })
+        });
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -60,7 +98,10 @@ window.onload = async function () {
 
 // 更新图表数据
 function updateChart(data) {
-    const categories = ['2023-01-10', '2023-01-11', '2023-01-12', '2023-01-13']; // 日期数组
+    const startDate = new Date('2023-01-09'); // 替换为你的开始日期
+    const endDate = new Date('2023-01-22'); // 替换为你的结束日期
+    
+    const categories = generateWeekdaysArray(startDate,endDate); // 日期数组
     const seriesData = [];
 
     data.forEach(item => {
