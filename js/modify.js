@@ -1,10 +1,10 @@
 
 // 获取box-body元素
 
-const fetchMyStockURL = 'http://localhost:8081/artists/getMystocks';
-const sellStocksURL = 'http://localhost:8081/artists/sellStocks'
-const fetchAllStockURL = 'http://localhost:8081/artists/getAllStocksList'
-const buyStcokURL = 'http://localhost:8081/artists/addMystocks'
+const fetchMyStockURL = 'http://localhost:8081/stocks/getMystocks';
+const sellStocksURL = 'http://localhost:8081/stocks/sellStocks'
+const fetchAllStockURL = 'http://localhost:8081/stocks/getAllStocksList'
+const buyStcokURL = 'http://localhost:8081/stocks/addMystocks'
 const share_num = document.getElementById('share_num');
 const buy_share_num = document.getElementById('share_num2');
 const sell_stocks_button = document.getElementById('sell_stocks_button');
