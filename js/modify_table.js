@@ -1,4 +1,4 @@
-let urlPortfolio = "http://localhost:8081/artists/getMystocks";
+let urlPortfolio = "http://localhost:8081/stocks/getMystocks";
 
 function getDate(dateString) {
     const date = new Date(dateString);

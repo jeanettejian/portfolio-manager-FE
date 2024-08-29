@@ -1,7 +1,7 @@
 
 // Initialize the chart
 var pieChart = echarts.init(document.getElementById('piechart'));
-let urlPortfolio = "http://localhost:8081/artists/getMystocks";
+let urlPortfolio = "http://localhost:8081/stocks/getMystocks";
 
 // Specify the configuration options for the pie chart
 var option = {
