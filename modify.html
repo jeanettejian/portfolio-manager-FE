@@ -150,32 +150,97 @@
                             <h3 class="box-title">Sell</h3>
                         </div>
                         <div class="box-body">
-                            <form class="form-horizontal">
+                            <form class="form-horizontal" id="sell-form">
                                 <div class="form-group" style="display:flex;justify-content:center;">
                                     <label class="col-sm-2 control-label">Asset</label>
                                     <div class="col-xs-5">
-                                        <select class="form-control">
-                                            <option>option 1</option>
-                                            <option>option 2</option>
-                                            <option>option 3</option>
-                                            <option>option 4</option>
-                                            <option>option 5</option>
+                                        <select class="form-control" id="stock-name">
+                                            <option value="AAPL">AAPL</option>
+                                            <option value="GOOGL">GOOGL</option>
+                                            <option value="AMZN">AMZN</option>
+                                            <option value="TSLA">TSLA</option>
+                                            <option value="MSFT">MSFT</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group" style="display:flex;justify-content:center;">
                                     <label class="col-sm-2 control-label">Share</label>
                                     <div class="col-xs-5">
-                                        <input type="text" class="form-control" id="share_num"
-                                            placeholder="Number of shares">
+                                        <input type="text" class="form-control" id="sell-amount" placeholder="Number of shares">
                                     </div>
                                 </div>
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Sell</button>
+                            <button type="button" class="btn btn-primary" id="sell-button">Sell</button>
                         </div>
+                        <div id="result-message"></div>
                         </form>
                     </div>
+                        
+               
+
+                        <script>
+                            // Backend URL for selling stocks
+                            const sellurl = "http://localhost:8081/artists/sellStocks";
+
+                            // Function to sell stock shares
+                            async function sellShares() {
+                                const stockNameInput = document.getElementById('stock-name');
+                                const sellAmountInput = document.getElementById('sell-amount');
+
+                                const stockName = stockNameInput.value.trim();
+                                const sellAmount = parseInt(sellAmountInput.value.trim());
+
+                                // Validate the stock name and sell amount
+                                if (!stockName) {
+                                    alert('Please enter a valid stock ticker.');
+                                    return;
+                                }
+                                if (isNaN(sellAmount) || sellAmount <= 0) {
+                                    alert('Please enter a valid number of shares to sell.');
+                                    return;
+                                }
+
+                                // Data to be sent to the backend
+                                const data = {
+                                    stock_name: stockName, // Dynamic stock ticker from user input
+                                    shares: sellAmount
+                                };
+
+                                try {
+                                    const response = await fetch(sellurl, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify(data)
+                                    });
+
+                                    const result = await response.json();
+
+                                    // Check for a successful response
+                                    if (response.ok) {
+                                        document.getElementById('result-message').innerText = result.message;
+                                    } else {
+                                        document.getElementById('result-message').innerText = 'Error: ' + result.message;
+                                    }
+
+                                    // Optionally, clear the input fields
+                                    stockNameInput.value = '';
+                                    sellAmountInput.value = '';
+
+                                } catch (error) {
+                                    console.error('Error:', error);
+                                    document.getElementById('result-message').innerText = 'Error selling shares. Please try again.';
+                                }
+                            }
+
+                            // Adding click event listener to the sell button
+                            document.getElementById('sell-button').addEventListener('click', sellShares);
+                        </script>
+
+                    
+                
 
                     <div class="box">
                         <div class="box-header with-border">
