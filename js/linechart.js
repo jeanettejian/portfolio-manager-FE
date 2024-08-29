@@ -1,5 +1,5 @@
-let urlAsset = "http://localhost:8081/artists/getstocks";
-let urlPortfolio = "http://localhost:8081/artists/getMystocks";
+let urlAsset = "http://localhost:8081/stocks/getstocks";
+let urlPortfolio = "http://localhost:8081/stocks/getMystocks";
 var AssetChart = echarts.init(document.getElementById('linechartAsset'));
 var PoChart = echarts.init(document.getElementById('linechartPo'));
 

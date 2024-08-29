@@ -1,4 +1,4 @@
-let sellurl ="http://localhost:8081/artists/sellStocks";
+let sellurl ="http://localhost:8081/stocks/sellStocks";
 
 async function sellShares(){
     const sellAmountInput = document.getElementById('share_num');
