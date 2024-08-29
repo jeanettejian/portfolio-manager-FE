@@ -31,7 +31,7 @@ async function fetchPortfolio(url) {
 }
 
 // 更新Asset图表
-function updateAssetChart(data, start, end) {
+function updateAssetChart(data, portfolio, start, end) {
     let startDate = new Date(start); // 替换为你的开始日期
     let endDate = new Date(end); // 替换为你的结束日期
 
@@ -39,10 +39,14 @@ function updateAssetChart(data, start, end) {
     const seriesData = [];
 
     data.forEach(item => {
-        seriesData.push({
-            name: item.stock_name,
-            type: 'line',
-            data: item.price
+        portfolio.forEach(asset => {
+            if (asset.share_name == item.stock_name) { // stocks should be matched with assets in the portfolio
+                seriesData.push({
+                    name: item.stock_name,
+                    type: 'line',
+                    data: item.price
+                });
+            }
         });
     });
     console.log('data', data)
@@ -131,11 +135,11 @@ function updateDate(sign) {
 
 async function submitDate(startDate, endDate, sign) {
     let data = await fetchData(urlAsset, startDate, endDate);
+    let portfolio = await fetchPortfolio(urlPortfolio);
     if (sign === 'A') {
-        updateAssetChart(data, startDate, endDate);
+        updateAssetChart(data, portfolio, startDate, endDate);
     }
     else {
-        let portfolio = await fetchPortfolio(urlPortfolio);
         updatePortfolioChart(data, portfolio, startDate, endDate);
     }
 }
@@ -193,7 +197,7 @@ window.onload = async function () {
         console.log(portfolio);
 
         // Update charts
-        updateAssetChart(data, defaultStart, defaultEnd);
+        updateAssetChart(data, portfolio, defaultStart, defaultEnd);
         updatePortfolioChart(data, portfolio,  defaultStart, defaultEnd);
     } catch (error) {
         console.error('Failed to fetch data:', error);
