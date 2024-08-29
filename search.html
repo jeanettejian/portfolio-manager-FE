@@ -23,6 +23,11 @@
     <script src="static/edu-modal-alert-confirm.js"></script>
 
     <style>
+        body {
+            background-image: url('static/background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
         .middle-box {
             position: absolute;
             left: 50%;
@@ -115,9 +120,10 @@
 
         <!-- specific pages, main body -->
 
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-image: url(static/background.jpg);background-size:cover;">
             <div class="container">
                 <div class="col-md-12" style="margin-top:10px;">
+                    
                     <div class="box">
                         <div class="box-header">
                             <div class="box-header with-border">
@@ -137,30 +143,28 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="row">
-                            <div id="stock-data" style="margin-top: 20px;">
-                                <!-- Table to display stock data -->
-                                <table class="table table-striped" id="stock-table" style="display:flex;justify-content:center;">
-                                    <thead>
-                                        <tr>
-                                            <th>Ticker</th>
-                                            <th>Date</th>
-                                            <th>Volume</th>
-                                            <th>VWAP</th>
-                                            <th>Open</th>
-                                            <th>Close</th>
-                                            <th>High</th>
-                                            <th>Low</th>
-                                            <th>Trades</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Data will be inserted here -->
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
-                        </div>
+                    </div>
+
+                    <div class="row" id="stock-table" style="display:none;">
+                            <!-- Table to display stock data -->
+                            <!-- <table class="table table-striped" id="stock-table" style="display:flex;justify-content:center;">
+                                <thead>
+                                    <tr>
+                                        <th>Ticker</th>
+                                        <th>Date</th>
+                                        <th>Volume</th>
+                                        <th>VWAP</th>
+                                        <th>Open</th>
+                                        <th>Close</th>
+                                        <th>High</th>
+                                        <th>Low</th>
+                                        <th>Trades</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table> -->
                     </div>
 
 
