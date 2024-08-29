@@ -1,7 +1,10 @@
-let urlPortfolio = "http://localhost:8081/artists/getstocks";
+let urlAsset = "http://localhost:8081/artists/getstocks";
+let urlPortfolio = "http://localhost:8081/artists/getMystocks";
+var AssetChart = echarts.init(document.getElementById('linechartAsset'));
+var PoChart = echarts.init(document.getElementById('linechartPo'));
 
 // Fetch portfolio value data from the back end
-async function fetchPortfolio(url, start, end) {
+async function fetchData(url, start, end) {
     const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -21,13 +24,18 @@ async function fetchPortfolio(url, start, end) {
     return data;
 }
 
-// 更新图表数据
-function updateChart(data, start, end) {
+async function fetchPortfolio(url) {
+    let response = await fetch(url);
+    let portfolioJson = response.json();
+    return portfolioJson;
+}
+
+// 更新Asset图表
+function updateAssetChart(data, start, end) {
     let startDate = new Date(start); // 替换为你的开始日期
     let endDate = new Date(end); // 替换为你的结束日期
-    
-    let categories = generateWeekdaysArray(startDate,endDate); // 日期数组
-    console.log(categories)
+
+    let categories = generateWeekdaysArray(startDate, endDate); // 日期数组
     const seriesData = [];
 
     data.forEach(item => {
@@ -37,9 +45,55 @@ function updateChart(data, start, end) {
             data: item.price
         });
     });
+    console.log('data', data)
 
     // 更新 ECharts 图表配置
-    myChart.setOption({
+    AssetChart.setOption({
+        xAxis: {
+            data: categories
+        },
+        series: seriesData
+    });
+}
+
+//Update Portfolio Line Chart
+function updatePortfolioChart(data, portfolio, start, end) {
+    let startDate = new Date(start); // 替换为你的开始日期
+    let endDate = new Date(end); // 替换为你的结束日期
+
+    let value_series = [];
+    data.forEach(item => {
+        let shares = 0;
+        portfolio.forEach(asset => {
+            if (asset.share_name == item.stock_name) {
+                shares = asset.shares;
+            }
+        })
+        console.log(shares);
+        let single_values = item.price.map(single_price => single_price*shares);
+        value_series.push(single_values);
+    })
+    
+    console.log("value_series:", value_series);
+    let value_array = [];
+    for(let j=0;j<value_series[0].length;j++){
+        let sum_column = 0;
+        for(let i=0;i<value_series.length;i++){
+            sum_column += value_series[i][j];
+        }
+        value_array.push(sum_column);
+    }
+    console.log(value_array)
+
+    let categories = generateWeekdaysArray(startDate, endDate); // 日期数组
+    const seriesData = [{
+        name: 'Portfolio Monetary Value',
+        type: 'line',
+        data: value_array
+    }];
+
+    // 更新 ECharts 图表配置
+    PoChart.setOption({
         xAxis: {
             data: categories
         },
@@ -48,10 +102,17 @@ function updateChart(data, start, end) {
 }
 
 //update start date and end date from the date picker
-function updateDate() {
-    var startDateStr = document.getElementById('startDate').value;
-    var endDateStr = document.getElementById('endDate').value;
-    var resultDiv = document.getElementById('resultDate');
+function updateDate(sign) {
+    if (sign === 'A') {
+        var startDateStr = document.getElementById('startDate').value;
+        var endDateStr = document.getElementById('endDate').value;
+        var resultDiv = document.getElementById('resultDate');
+    }
+    else {
+        var startDateStr = document.getElementById('startDatePo').value;
+        var endDateStr = document.getElementById('endDatePo').value;
+        var resultDiv = document.getElementById('resultDatePo');
+    }
 
     if (startDateStr && endDateStr) {
         let startDate = new Date(startDateStr);
@@ -61,35 +122,23 @@ function updateDate() {
             alert('Start date cannot be later than end date!');
         } else { // Dates changed
             resultDiv.innerHTML = 'Selected Date Range: ' + startDateStr + ' to ' + endDateStr;
-            submitDate(urlPortfolio, startDateStr, endDateStr);
+            submitDate(startDateStr, endDateStr, sign);
         }
     } else {
         resultDiv.innerHTML = 'Please select both start date and end date';
     }
 }
 
-async function submitDate(url, startDate, endDate){
-    let data = await fetchPortfolio(url, startDate, endDate);
-    console.log(startDate, endDate);
-    updateChart(data, startDate, endDate);
+async function submitDate(startDate, endDate, sign) {
+    let data = await fetchData(urlAsset, startDate, endDate);
+    if (sign === 'A') {
+        updateAssetChart(data, startDate, endDate);
+    }
+    else {
+        let portfolio = await fetchPortfolio(urlPortfolio);
+        updatePortfolioChart(data, portfolio, startDate, endDate);
+    }
 }
-
-// document.getElementById('startDate').addEventListener('change', updateDate);
-// document.getElementById('endDate').addEventListener('change', updateDate);
-
-// let valueJson = await fetchPortfolio(urlPortfolio);
-// console.log(valueJson);
-
-// let values = [];
-// let dates = [];
-// valueJson.forEach(item => {
-//     let {portfolioValue, time} = item;
-//     values.push(portfolioValue);
-//     dates.push(time);
-// })
-
-// console.log(values)
-// console.log(dates)
 
 // 工具函数：判断是否为工作日（周一到周五）
 function isWeekday(date) {
@@ -105,25 +154,18 @@ function generateWeekdaysArray(startDate, endDate) {
     while (currentDate <= endDate) {
         if (isWeekday(currentDate)) {
             categories.push(currentDate.toISOString().split('T')[0]); // 将日期格式化为 YYYY-MM-DD
-            console.log(categories)
         }
         currentDate.setDate(currentDate.getDate() + 1); // 将日期加一天
     }
-    console.log("cat:", categories)
     return categories;
 }
-// 基于准备好的 DOM，初始化 ECharts 实例
-
-var myChart = echarts.init(document.getElementById('linechart'));
 
 // 指定图表的初始配置项和数据
 var option = {
     tooltip: {
         trigger: 'axis'
     },
-    legend: {
-        data:[],
-    },
+    legend: {},
     xAxis: {
         type: 'category',
         data: []
@@ -135,35 +177,24 @@ var option = {
 };
 
 // 使用刚指定的配置项和数据显示图表
-myChart.setOption(option);
+AssetChart.setOption(option);
+PoChart.setOption(option);
 
 // 页面加载时自动调用
 window.onload = async function () {
     console.log('window.onload 已执行'); // 在这里添加日志输出
 
     try {
-        // 发起 GET 请求获取数据
-        // const response = await fetch('http://localhost:8081/artists/getstocks', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         startDate: '2023-01-09',
-        //         endDate: '2023-01-20'
-        //     })
-        // });
-
-        // if (!response.ok) {
-        //     throw new Error('Network response was not ok');
-        // }
+        //Get data
         const defaultStart = '2023-01-09';
         const defaultEnd = '2023-01-20';
-        const data = await fetchPortfolio(urlPortfolio, defaultStart, defaultEnd);
+        const data = await fetchData(urlAsset, defaultStart, defaultEnd);
+        const portfolio = await fetchPortfolio(urlPortfolio);
+        console.log(portfolio);
 
-
-        // 处理和更新数据
-        updateChart(data, defaultStart, defaultEnd);
+        // Update charts
+        updateAssetChart(data, defaultStart, defaultEnd);
+        updatePortfolioChart(data, portfolio,  defaultStart, defaultEnd);
     } catch (error) {
         console.error('Failed to fetch data:', error);
     }
