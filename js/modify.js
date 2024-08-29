@@ -83,12 +83,13 @@ sell_stocks_button.addEventListener('click', async function () {
                 "shares" : integerValue
             })
         });
-        console.log(response)
+        alert('Successfully sold your stock!')
 
         // 处理响应
         if (response.ok) {
             const result = await response.json();
             console.log('Stock sold successfully:', result);
+            
         } else {
             console.error('Failed to sell stocks:', response.statusText);
         }
@@ -174,8 +175,7 @@ try {
             shares: buy_integerValue,
             price: buy_stock_price
         })
-    });buy_integerValue
-
+    });
 
     // 处理响应
     if (response.ok) {
@@ -186,6 +186,7 @@ try {
     }
 } catch (error) {
     console.error('Error occurred during the fetch:', error);
+    
 }
 
 });
