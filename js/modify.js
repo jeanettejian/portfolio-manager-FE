@@ -1,3 +1,4 @@
+
 // 获取box-body元素
 
 const fetchMyStockURL = 'http://localhost:8081/artists/getMystocks';
@@ -49,7 +50,9 @@ function populateSelectBoxForSelling(stockList) {
 
 // 添加点击事件监听器
 sellboxBody.addEventListener('click', async function () {
-    if (sellboxBody.options.length === 0) {const stockList = await fetchMyStocks(fetchMyStockURL);}
+    if (sellboxBody.options.length === 0) {
+        const stockList = await fetchMyStocks(fetchMyStockURL);
+        selectedValue = sellboxBody.options[0].value}
     
     
 });
@@ -66,6 +69,7 @@ sell_stocks_button.addEventListener('click', async function () {
     // 获取输入框的值并转换为整数
     const inputValue = share_num.value; 
     const integerValue = parseInt(inputValue, 10); 
+    console.log('yy',stock_name,integerValue)
  
     // 检查转换结果是否为有效的整数
     if (isNaN(integerValue)) {
@@ -83,12 +87,12 @@ sell_stocks_button.addEventListener('click', async function () {
                 "shares" : integerValue
             })
         });
-        console.log(response)
 
         // 处理响应
         if (response.ok) {
             const result = await response.json();
             console.log('Stock sold successfully:', result);
+            
         } else {
             console.error('Failed to sell stocks:', response.statusText);
         }
@@ -119,7 +123,10 @@ function populateSelectBoxForBuying(buystockList) {
 buyboxBody.addEventListener('click', async function () {
     
     if (buyboxBody.options.length === 0) {
-        const allStockList = await fetchAllStocks(fetchAllStockURL);}
+        const allStockList = await fetchAllStocks(fetchAllStockURL);
+        selectedBuyName = allStockList[0].ticker
+        selectedBuyPrice = allStockList[0].price
+    }
     
 });
 
@@ -174,8 +181,7 @@ try {
             shares: buy_integerValue,
             price: buy_stock_price
         })
-    });buy_integerValue
-
+    });
 
     // 处理响应
     if (response.ok) {
@@ -186,6 +192,6 @@ try {
     }
 } catch (error) {
     console.error('Error occurred during the fetch:', error);
+    
 }
-
 });
