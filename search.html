@@ -126,33 +126,70 @@
                         </div>
                         <div class="box-body">
                             <div class="row">
-                                <form action="#" method="post" style="display:flex;justify-content:center;">
+                                <form method="post" style="display:flex;justify-content:center;">
                                     <div class="input-group col-xs-3">
-                                        <input type="text" name="input_symbol" placeholder="Type Asset Symbol ..."
-                                            class="form-control">
+                                        <input type="text" id="stockid" name="input_symbol"
+                                            placeholder="Type Asset Symbol ..." class="form-control">
                                         <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-primary btn-flat">Search</button>
+                                            <button type="button" id="search-button"
+                                                class="btn btn-primary btn-flat" onclick="getStockInfo()">Search</button>
                                         </span>
                                     </div>
                                 </form>
                             </div>
+                            <div class="row">
+                            <div id="stock-data" style="margin-top: 20px;">
+                                <!-- Table to display stock data -->
+                                <table class="table table-striped" id="stock-table" style="display:flex;justify-content:center;">
+                                    <thead>
+                                        <tr>
+                                            <th>Ticker</th>
+                                            <th>Date</th>
+                                            <th>Volume</th>
+                                            <th>VWAP</th>
+                                            <th>Open</th>
+                                            <th>Close</th>
+                                            <th>High</th>
+                                            <th>Low</th>
+                                            <th>Trades</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Data will be inserted here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         </div>
                     </div>
+
+
+
+
+
+
+
                 </div>
             </div>
-
-            <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
-            
         </div>
+    </div>
+    </div>
 
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-            </div>
-        </footer>
 
-        <!-- background -->
-        <div class="control-sidebar-bg"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
+    <script src = "js/searchstock.js"></script>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+        </div>
+    </footer>
+
+    <!-- background -->
+    <div class="control-sidebar-bg"></div>
     </div>
 
 </body>
